@@ -1,0 +1,171 @@
+package aok;
+import java.util.Scanner;
+public class KonversiDesimalBinerHeksa {
+    public static void main(String[]args){
+        Scanner input = new Scanner(System.in);
+        int pilihan,n,a,decimal,length;
+        String hex,binary;
+        System.out.println("Selamat Datang di Program Konversi ");
+        System.out.println("1. Konversi Angka Biner Ke Angka Desimal");
+        System.out.println("2. Konversi Angka Desimal Ke Angka Biner");
+        System.out.println("3. Konversi Angka Biner Ke Angka Heksadesimal");
+        System.out.println("4. Konversi Angka Heksadesimal Ke Angka Biner");
+        System.out.println("5. Konversi Angka Desimal Ke Angka Heksadesimal");
+        System.out.println("6. Konversi Angka Heksadesimal ke Angka Desimal");
+        System.out.print("Masukkan angka pilihan anda: ");
+        pilihan = input.nextInt();
+        switch (pilihan){
+            case 1:
+                
+                int b1 = 1;
+                int c = 0;
+                System.out.print("Masukkan Bilangan Biner: ");
+                n = input.nextInt();
+                
+                while(n!= 0){
+                    a = n%10;
+                    c = c + (a*b1);
+                    b1 = b1*2;
+                    n = n/10;
+                }
+                System.out.println(" Angka Biner: "+c);
+                break;
+            case 2:
+                
+                String x = "";
+                System.out.print("Masukkan Angka Desimal: ");
+                n = input.nextInt();
+        
+                if (n == 0) {
+                    x = "0";
+                } else {
+                    while (n > 0) {
+                        int b = n % 2;
+                        if (b == 1) {
+                            x = "1" + x;
+                } else {
+                    x = "0" + x;
+                }
+                n = n / 2;
+                    }
+                }
+
+                System.out.println("Angka Biner: " + x);
+                break;
+            case 3:
+                
+                System.out.print("Masukkan Angka Biner: ");
+                binary = input.next();
+
+                int binaryLength = binary.length();
+                decimal = 0;
+                int base = 1;
+
+                while (binaryLength > 0) {
+                    int digit = binary.charAt(binaryLength - 1) == '1' ? 1 : 0;
+                    decimal += digit * base;
+                    base *= 2;
+                    binaryLength--;
+                }
+
+                hex = "";
+        
+                while (decimal > 0) {
+                    int remainder = decimal % 16;
+                    char hexDigit;
+                    if (remainder < 10) {
+                        hexDigit = (char) ('0' + remainder);
+                    } else {
+                        hexDigit = (char) ('A' + remainder - 10);
+                    }
+                    hex = hexDigit + hex;
+                    decimal /= 16;
+                }
+
+                System.out.println("Angka Heksadesimal: " + hex);
+                break;
+            case 4:
+                System.out.print("Masukkan Angka Heksadesimal: ");
+                hex = input.next().toUpperCase(); 
+
+                decimal = 0;
+                length = hex.length();
+
+                for (int i = 0; i < length; i++) {
+                    char digit = hex.charAt(i);
+                    int digitValue;
+            
+                    if (digit >= '0' && digit <= '9') {
+                        digitValue = digit - '0';
+                    } else if (digit >= 'A' && digit <= 'F') {
+                        digitValue = digit - 'A' + 10;
+                    } else {
+                        System.out.println("Input tidak valid.");
+                        return;
+                    }
+
+                    decimal = decimal * 16 + digitValue;
+                }
+
+                binary = "";
+        
+                while (decimal > 0) {
+                    int remainder = decimal % 2;
+                    binary = remainder + binary;
+                    decimal = decimal / 2;
+                }
+
+                System.out.println("Angka Biner: " + binary);
+                break;
+            case 5:
+                System.out.print("Masukkan Angka Desimal: ");
+                decimal = input.nextInt();
+
+                if (decimal == 0) {
+                    System.out.println("Angka Heksadesimal: 0");
+                } else {
+                    hex = "";
+                    while (decimal > 0) {
+                        int remainder = decimal % 16;
+                        char hexDigit;
+                        if (remainder < 10) {
+                            hexDigit = (char) ('0' + remainder);
+                        } else {
+                            hexDigit = (char) ('A' + remainder - 10);
+                        }
+                        hex = hexDigit + hex;
+                        decimal /= 16;
+                    }
+                    System.out.println("Angka Heksadesimal: " + hex);
+                }
+                break;
+            case 6:
+                System.out.print("Masukkan Angka Heksadesimal: ");
+                hex = input.next().toUpperCase(); 
+
+                decimal = 0;
+                length = hex.length();
+
+                for (int i = 0; i < length; i++) {
+                    char digit = hex.charAt(i);
+                    int digitValue;
+            
+                    if (digit >= '0' && digit <= '9') {
+                        digitValue = digit - '0';
+                    } else if (digit >= 'A' && digit <= 'F') {
+                        digitValue = digit - 'A' + 10;
+                    } else {
+                        System.out.println("Input tidak valid.");
+                        return;
+                    }
+
+                    decimal = decimal * 16 + digitValue;
+                }
+
+                System.out.println("Angka Desimal: " + decimal);
+                break;
+            default:
+                System.out.println("Tidak Ada di Pilihan");
+    }
+}
+}
